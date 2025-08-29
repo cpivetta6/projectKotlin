@@ -1,0 +1,27 @@
+{
+  "users": [
+    {
+      "userid": "cbissolo",
+      "lists": [
+        {
+          "listid": "adqxaftt",
+          "name": "Compras Semanais de agosto",
+          "created_at": "2025-08-24",
+          "items": [
+            { "description": "Banana", "quantity": 4 },
+            { "description": "Maçã", "quantity": 2 }
+          ]
+        },
+        {
+          "listid": "bdfqz123",
+          "name": "Compras Semanais setembro",
+          "created_at": "2025-09-23",
+          "items": [
+            { "description": "Banana", "quantity": 8 },
+            { "description": "Ovos", "quantity": 7 }
+          ]
+        }
+      ]
+    }
+  ]
+}

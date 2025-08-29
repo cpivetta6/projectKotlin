@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color"
+    tools:context=".ui.MainActivity">
+
+
+    <TextView
+        android:id="@+id/mainTitle"
+        android:layout_width="348dp"
+        android:layout_height="103dp"
+        android:fontFamily="@font/agbalumo"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Smart Grocery"
+        android:textColor="#FFFFFF"
+        android:textColorLink="@color/black"
+        android:textSize="48dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="6dp" />
+
+    <Button
+        android:id="@+id/btnGroceryList"
+        android:layout_width="307dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="25dp"
+        android:text="Grocery list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainTitle" />
+
+    <Button
+        android:id="@+id/btnStoric"
+        android:layout_width="307dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="25dp"
+        android:text="Storic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnGroceryList" />
+
+    <Button
+        android:id="@+id/btnSettings"
+        android:layout_width="307dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="25dp"
+        android:text="Settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnStoric" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="264dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="368dp"
+        android:fontFamily="@font/agbalumo"
+        android:text="-"
+        android:textColor="#FFFFFF"
+        android:textSize="48dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mainTitle" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

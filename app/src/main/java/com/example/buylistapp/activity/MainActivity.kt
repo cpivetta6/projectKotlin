@@ -1,4 +1,4 @@
-package com.example.buylistapp.ui
+package com.example.buylistapp.activity
 
 import android.os.Bundle
 import android.widget.Button
@@ -31,8 +31,11 @@ class MainActivity : AppCompatActivity() {
         val btnStoric = findViewById<Button>(R.id.btnStoric)
         val btnSettings = findViewById<Button>(R.id.btnSettings)
 
+
+
+
         btnGroceryList.setOnClickListener{
-            val intent = Intent(this, GroceryList::class.java)
+            val intent = Intent(this, MasterListActivity::class.java)
             startActivity(intent)
         }
 

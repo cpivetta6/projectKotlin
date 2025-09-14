@@ -1,26 +1,18 @@
-package com.example.buylistapp.ui
+package com.example.buylistapp.activity
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import android.app.AlertDialog
-import android.util.Log
-import android.widget.EditText
-import androidx.recyclerview.widget.ItemTouchHelper
-import com.example.buylistapp.JsonManager
 import com.example.buylistapp.R
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.buylistapp.model.GrItemAdapter
+import com.example.buylistapp.adapters.GrItemAdapter
 import com.example.buylistapp.model.GrItem
 
 
-class NewList : AppCompatActivity() {
+class DetailListActivity : AppCompatActivity() {
     @SuppressLint("MissingSuperCall")
 
     private lateinit var recyclerView: RecyclerView
@@ -28,19 +20,16 @@ class NewList : AppCompatActivity() {
     private val items = mutableListOf<GrItem>() // lista usada pelo adapter
 
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_new_list)
+        setContentView(R.layout.activity_new_itemlist)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.newListPage)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-
+        /*
         recyclerView = findViewById(R.id.container)
         adapter = GrItemAdapter(items, this, JsonManager.loadJson(this))
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -91,6 +80,7 @@ class NewList : AppCompatActivity() {
                 .setView(dialogView)
                 .setPositiveButton("OK") { _, _ ->
                     val description = editDescription.text.toString()
+
                     val quantity = editQuantity.text.toString().toIntOrNull() ?: 0
 
                     if (description.isNotEmpty()) {
@@ -126,7 +116,7 @@ class NewList : AppCompatActivity() {
 
 
 
-
+        */
 
     }
 }

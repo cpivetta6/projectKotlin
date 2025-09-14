@@ -1,4 +1,4 @@
-package com.example.buylistapp.model
+package com.example.buylistapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,21 +7,19 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import android.content.Context
-import android.util.Log
 import android.widget.EditText
-import com.example.buylistapp.JsonManager
 import com.example.buylistapp.R
+import com.example.buylistapp.model.GrItem
+import com.example.buylistapp.model.GrRoot
 
 
 class GrItemAdapter(
     private val items: MutableList<GrItem>,
-    private val context: Context,
-    private val root: GrRoot) :
+    //private val context: Context,
+    private val root: GrRoot
+) :
 
     RecyclerView.Adapter<GrItemAdapter.GrItemViewHolder>() {
-
-
-
     class GrItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvDescription: TextView = itemView.findViewById(R.id.tvDescription)
         val tvQuantity: TextView = itemView.findViewById(R.id.tvQuantity)
@@ -53,15 +51,15 @@ class GrItemAdapter(
 
                     //Update item
                         if (newDesc.isNotEmpty()) {
-                            JsonManager.updateItem(
+                            /*JsonManager.updateItem(
                                 context,
                                 oldDescription = item.description,
                                 newDescription = newDesc
 
-                            )
+                            )*/
 
                             // Atualiza o RecyclerView também
-                            updateItem(position, GrItem( newDesc, item.quantity))
+                            //updateItem(position, GrItem( newDesc, item.quantity))
 
 
                         //notifyItemChanged(position) // atualiza só este item
@@ -92,7 +90,7 @@ class GrItemAdapter(
         //Log.d("RecyclerView", "REMOVO POS: $position")
         val item = items[position]
 
-        JsonManager.removeItem(context, item.description)
+        //JsonManager.removeItem(context, item.description)
         items.removeAt(position)
         notifyItemRemoved(position)
     }

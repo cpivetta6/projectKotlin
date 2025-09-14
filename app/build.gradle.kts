@@ -1,7 +1,9 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.android )
+    alias(libs.plugins.kotlin.kapt)
 }
+
 
 android {
     namespace = "com.example.buylistapp"
@@ -33,11 +35,31 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+
 }
+
+
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
+    val roomVersion = "2.7.2"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    //annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    implementation(libs.room.ktx)
+    kapt("androidx.room:room-compiler:$roomVersion")
+    //kapt(libs.room.compiler)
+
+    //compose?
+    /*
+    implementation (libs.ui)
+    implementation (libs.androidx.ui.tooling.preview)
+    implementation (libs.androidx.material3)*/
+
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.0")
+
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)

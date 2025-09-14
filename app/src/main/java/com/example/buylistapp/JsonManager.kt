@@ -11,6 +11,7 @@ import java.io.File
 
 object JsonManager {
 
+    /*
     private const val FILENAME = "data.json"
 
     // Lê o JSON e retorna o Root ou cria um vazio se não existir
@@ -83,5 +84,5 @@ object JsonManager {
     }
 
 
-
+*/
     }

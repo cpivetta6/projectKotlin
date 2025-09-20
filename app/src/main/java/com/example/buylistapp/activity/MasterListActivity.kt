@@ -1,6 +1,7 @@
 package com.example.buylistapp.activity
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,16 +22,24 @@ import com.example.buylistapp.R
 import com.example.buylistapp.adapters.GrListAdapter
 import com.example.buylistapp.adapters.GrSymbolAdapter
 import com.example.buylistapp.model.GrShoppingList
+import com.example.buylistapp.viewModel.MasterListViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+
+
 class MasterListActivity : AppCompatActivity() {
     @SuppressLint("MissingSuperCall")
+
+
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var listAdapter: GrListAdapter
     private val lists = mutableListOf<GrShoppingList>()
+    private val masterListViewModel: MasterListViewModel by viewModels()
+
+
 
     //Symbol
     private var selectedSymbolForNewList: String? = null // Para armazenar o símbolo escolhido
@@ -92,23 +102,39 @@ class MasterListActivity : AppCompatActivity() {
 
                     val ownerId = ""
                     if (ownerId == "ID_USUARIO_PADRAO_ERRO" || ownerId == null) {
-                        //Log.e("MasterListActivity", "Não foi possível obter o ID do usuário. Lista não adicionada.")
+                        //Log.e("MasterListViewModel", "Não foi possível obter o ID do usuário. Lista não adicionada.")
                         //Toast.makeText(this, "Erro ao identificar usuário. Tente novamente.", Toast.LENGTH_LONG).show()
                         return@setPositiveButton // Sai do listener do botão positivo
                     }
+
+
 
                     val descriptionFromEditText = editDescription.text.toString().trim()
                     var descriptionFromSymbol = selectedSymbolForNewList ?: "🛒" // Usa o símbolo ou um padrão
                     //descriptionFromSymbol = "$descriptionFromSymbol + test"
 
+
+
+                    /* //Objeto passado para o recycler view
                     val newList = GrShoppingList(
                         description = descriptionFromEditText,
                         category = descriptionFromSymbol,
                         ownerUserId = ownerId,
                         createdate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
+                    )*/
+
+                    Log.e("MasterListViewModel", "Erro ao adicionar lista:  $descriptionFromEditText")
+
+                    //View Model
+                    masterListViewModel.addNewShoppingList(
+                        description = editDescription.text.toString().trim(),
+                        symbol = selectedSymbolForNewList ?: "🛒",
+
                     )
 
+
                     //Codigo do Adapter
+                    /*
                     if (::listAdapter.isInitialized) {
                         Log.d("MasterListActivity", "Adapter está inicializado. Chamando adapter.addList().")
                         listAdapter.addList(newList) // <--- PONTO DE INTERESSE
@@ -117,7 +143,7 @@ class MasterListActivity : AppCompatActivity() {
                     } else {
                         Log.e("MasterListActivity", "ERRO CRÍTICO: Adapter NÃO foi inicializado!")
                         Toast.makeText(this, "Erro: Adapter não configurado.", Toast.LENGTH_SHORT).show()
-                    }
+                    }*/
 
                     // Persistir 'newList' no banco de dados Room aqui (usando ViewModel e Coroutine)
                     // viewModel.insertShoppingList(newList)
@@ -157,6 +183,8 @@ class MasterListActivity : AppCompatActivity() {
             insets
         }
     }
+
+
 
 
 

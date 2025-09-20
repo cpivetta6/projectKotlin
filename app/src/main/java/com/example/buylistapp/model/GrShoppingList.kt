@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
         androidx.room.ForeignKey(
             entity = GrUser::class,
             parentColumns = ["userid"],
-            childColumns = ["id"],
+            childColumns = ["ownerUserId"],
             onDelete = androidx.room.ForeignKey.CASCADE)
     ],
     indices = [Index(value= ["ownerUserId"])]

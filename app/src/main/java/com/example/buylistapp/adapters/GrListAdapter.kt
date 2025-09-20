@@ -140,8 +140,11 @@ class GrListAdapter (
     }
 
     private fun updateList(position: Int, newList: GrShoppingList) {
-        lists[position] = newList   // substitui o item na lista]
-        notifyItemChanged(position) // manda o RecyclerView redesenhar só aquele item
+        //lists[position] = newList   // substitui o item na lista]
+        //notifyItemChanged(position) // manda o RecyclerView redesenhar só aquele item
+        //lists.clear()
+        //lists.addAll(newLists)
+
     }
 
     private fun removeList(position: Int){

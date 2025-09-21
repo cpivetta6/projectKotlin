@@ -1,20 +1,20 @@
 package com.example.buylistapp.activity
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,10 +23,10 @@ import com.example.buylistapp.adapters.GrListAdapter
 import com.example.buylistapp.adapters.GrSymbolAdapter
 import com.example.buylistapp.model.GrShoppingList
 import com.example.buylistapp.viewModel.MasterListViewModel
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-
 
 
 class MasterListActivity : AppCompatActivity() {
@@ -58,9 +58,20 @@ class MasterListActivity : AppCompatActivity() {
         val btnMainPage = findViewById<Button>(R.id.btnBack)
 
         recyclerView = findViewById(R.id.rvcontainer) // SUBSTITUA PELO ID CORRETO
-        listAdapter = GrListAdapter(lists, this)
+        listAdapter = GrListAdapter(this, this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = listAdapter
+
+
+        // Observar o StateFlow do ViewModel para atualizar a lista
+        lifecycleScope.launch {
+            masterListViewModel.allShoppingLists.collect { shoppingLists ->
+                // Este bloco é chamado IMEDIATAMENTE quando há um valor no StateFlow
+                // (ou assim que o StateFlow recebe seu primeiro valor do DB via ViewModel)
+                // e também sempre que o StateFlow é atualizado.
+                listAdapter.submitList(shoppingLists) // Passa a lista para o ListAdapter
+            }
+        }
 
 
 
@@ -74,7 +85,6 @@ class MasterListActivity : AppCompatActivity() {
             val titleList = dialogView.findViewById<TextView>(R.id.titleList)
             val editDescription = dialogView.findViewById<EditText>(R.id.editDescription)
             //val editCategory = dialogView.findViewById<EditText>(R.id.symbolsRecyclerViewDialog)
-
 
 
             //SYMBOL
@@ -108,20 +118,10 @@ class MasterListActivity : AppCompatActivity() {
                     }
 
 
-
                     val descriptionFromEditText = editDescription.text.toString().trim()
                     var descriptionFromSymbol = selectedSymbolForNewList ?: "🛒" // Usa o símbolo ou um padrão
-                    //descriptionFromSymbol = "$descriptionFromSymbol + test"
 
 
-
-                    /* //Objeto passado para o recycler view
-                    val newList = GrShoppingList(
-                        description = descriptionFromEditText,
-                        category = descriptionFromSymbol,
-                        ownerUserId = ownerId,
-                        createdate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
-                    )*/
 
                     Log.e("MasterListViewModel", "Erro ao adicionar lista:  $descriptionFromEditText")
 
@@ -133,20 +133,6 @@ class MasterListActivity : AppCompatActivity() {
                     )
 
 
-                    //Codigo do Adapter
-                    /*
-                    if (::listAdapter.isInitialized) {
-                        Log.d("MasterListActivity", "Adapter está inicializado. Chamando adapter.addList().")
-                        listAdapter.addList(newList) // <--- PONTO DE INTERESSE
-                        // Se o log dentro de addList no adapter não aparece,
-                        // ou esta linha não é chamada, ou há um problema ANTES dela.
-                    } else {
-                        Log.e("MasterListActivity", "ERRO CRÍTICO: Adapter NÃO foi inicializado!")
-                        Toast.makeText(this, "Erro: Adapter não configurado.", Toast.LENGTH_SHORT).show()
-                    }*/
-
-                    // Persistir 'newList' no banco de dados Room aqui (usando ViewModel e Coroutine)
-                    // viewModel.insertShoppingList(newList)
 
 
                 }
@@ -154,12 +140,6 @@ class MasterListActivity : AppCompatActivity() {
                 .setNegativeButton("Cancel", null)
                 .show()
         }
-
-        /*
-        btnAddList.setOnClickListener{
-            val intent = Intent(this, DetailListActivity::class.java)
-            startActivity(intent)
-        }*/
 
 
 
@@ -184,9 +164,14 @@ class MasterListActivity : AppCompatActivity() {
         }
     }
 
+    fun onDeleteClicked(list: GrShoppingList, position: Int) {
+        masterListViewModel.deleteShoppingList(list)
+    }
 
-
-
+    //fun updateShoppingList(listToUpdate: GrShoppingList, newDescription: String, newSymbol: String) {
+    fun onEditClicked(list: GrShoppingList, position: Int, newName: String) {
+        masterListViewModel.updateShoppingList(list, newName, list.category)
+    }
 
 
 }

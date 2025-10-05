@@ -16,9 +16,10 @@ import androidx.room.Index
             )
 data class GrItem (
     @PrimaryKey(autoGenerate = true)
-    var id: Int, //PK
+    var id: Int = 0, //PK
     var shoppingListId : Int,//Foreign Key List
     var description: String,
-    var quantity: Int
+    var amount: Int,
+    var isChecked: Boolean = false
 
 )

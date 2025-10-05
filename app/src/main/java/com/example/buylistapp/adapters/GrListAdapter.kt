@@ -78,6 +78,7 @@ class GrListAdapter(
             itemView.setOnClickListener {
                 val intent = Intent(context, DetailListActivity::class.java)
                 // Se DetailListActivity precisa do ID da lista, passe-o aqui:
+                intent.putExtra(DetailListActivity.EXTRA_LIST_ID, list.id)
                 // intent.putExtra("LIST_ID", list.id) // Supondo que GrShoppingList tenha um 'id'
                 context.startActivity(intent)
             }
@@ -91,9 +92,9 @@ class GrListAdapter(
                     .setTitle("Editar nome da lista")
                     .setView(editText)
                     .setPositiveButton("Salvar") { _, _ ->
-                        val newName = editText.text.toString().trim()
+                        val newText = editText.text.toString().trim()
                         //if (newName.isNotEmpty()) {
-                            listener.onEditClicked(list, position, newName)
+                            listener.onEditClicked(list, position, newText)
                         //}
                     }
                     .setNegativeButton("Cancelar", null)

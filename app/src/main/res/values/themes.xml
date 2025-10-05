@@ -3,6 +3,15 @@
     <style name="Base.Theme.BuyListApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Cor principal da marca -->
+
+        <!-- Controlar o estilo dos botões -->
+
+    </style>
+
+    <style name="ShapeAppearanceOverlay.FullRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
     </style>
 
     <style name="Theme.BuyListApp" parent="Base.Theme.BuyListApp" />

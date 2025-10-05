@@ -50,17 +50,17 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/container"
-        android:layout_width="413dp"
+        android:layout_width="396dp"
         android:layout_height="391dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.559" />
+        app:layout_constraintVertical_bias="0.547" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

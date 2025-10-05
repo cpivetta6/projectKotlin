@@ -32,14 +32,10 @@ import java.util.Locale
 class MasterListActivity : AppCompatActivity() {
     @SuppressLint("MissingSuperCall")
 
-
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var listAdapter: GrListAdapter
     private val lists = mutableListOf<GrShoppingList>()
     private val masterListViewModel: MasterListViewModel by viewModels()
-
-
 
     //Symbol
     private var selectedSymbolForNewList: String? = null // Para armazenar o símbolo escolhido
@@ -49,9 +45,7 @@ class MasterListActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_grocery_list)
 
-
         setupWindowInsets()
-
 
 
         val btnAddList = findViewById<Button>(R.id.btnNewList)
@@ -72,8 +66,6 @@ class MasterListActivity : AppCompatActivity() {
                 listAdapter.submitList(shoppingLists) // Passa a lista para o ListAdapter
             }
         }
-
-
 
 
         //Add nova lista
@@ -133,8 +125,6 @@ class MasterListActivity : AppCompatActivity() {
                     )
 
 
-
-
                 }
 
                 .setNegativeButton("Cancel", null)
@@ -142,19 +132,12 @@ class MasterListActivity : AppCompatActivity() {
         }
 
 
-
-
-
         btnMainPage.setOnClickListener{
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
 
-
-
-
     }
-
 
     private fun setupWindowInsets(){
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
